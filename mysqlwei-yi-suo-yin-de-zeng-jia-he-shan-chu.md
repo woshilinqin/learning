@@ -45,5 +45,20 @@ ALTER TABLE table_name DROP INDEX index_name
 ALTER TABLE table_name DROP PRIMARY KEY
 ```
 
+### 3.增加索引
+
+ALTER TABLE用来创建普通索引、UNIQUE索引或PRIMARY KEY索引。
+
+```
+#增加普通索引
+ALTER TABLE table_name ADD INDEX index_name (column_list)
+#增加唯一索引
+ALTER TABLE table_name ADD UNIQUE (column_list)
+#增加主键索引
+ALTER TABLE table_name ADD PRIMARY KEY (column_list)
+```
+
+### 
+
 
 
