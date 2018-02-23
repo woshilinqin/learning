@@ -1,4 +1,4 @@
-* # mysql中字段唯一索引unique
+# mysql中字段唯一索引unique
 
 ### 1.增加
 
