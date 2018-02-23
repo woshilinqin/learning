@@ -33,5 +33,17 @@ show keys FROM trans_push_task；
 
 * Null: 如果列含有NULL，则含有YES。如果没有，则该列含有NO。
 
+列表中的第二栏就是唯一索引，把它删除即可。
+
+```
+#按索引名字删除索引
+DROP INDEX index_name ON talbe_name
+或者
+ALTER TABLE table_name DROP INDEX index_name
+
+#删除主键
+ALTER TABLE table_name DROP PRIMARY KEY
+```
+
 
 
