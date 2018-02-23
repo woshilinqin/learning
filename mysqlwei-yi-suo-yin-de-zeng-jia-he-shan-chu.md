@@ -31,5 +31,7 @@ show keys FROM trans_push_task；
 
 * Non\_unique: 是否唯一，0是，1否。
 
+* Null: 如果列含有NULL，则含有YES。如果没有，则该列含有NO。
+
 
 
