@@ -171,119 +171,119 @@
 
 ```
 <build>
-	<finalName>hc-service</finalName>
+    <finalName>hc-service</finalName>
 
-	<resources>
-		<resource>
-			<targetPath>${project.build.directory}/classes</targetPath>
-			<directory>src/main/resources</directory>
-			<filtering>true</filtering>
-			<includes>
-				<include>**/*.xml</include>
-				<include>**/*.properties</include>
-			</includes>
-		</resource>
-		<!-- 结合com.alibaba.dubbo.container.Main 按照约定把spring文件夹下面配置拷贝到META-INF下面 -->
-		<resource>
-			<targetPath>${project.build.directory}/classes/META-INF/spring</targetPath>
-			<directory>src/main/resources/spring</directory>
-			<filtering>true</filtering>
-			<includes>
-				<include>spring-context.xml</include>
-			</includes>
-		</resource>
-		<!-- 复制META-INF下面的配置到生成jar下,包括自定义的jetty内置容器和ip过滤白名单 -->
-		<resource>
-			<targetPath>${project.build.directory}/classes/META-INF/dubbo/internal</targetPath>
-			<directory>src/main/resources/META-INF/dubbo/internal</directory>
-			<filtering>true</filtering>
-			<includes>
-				<include>*</include>
-			</includes>
-		</resource>
-	</resources>
+    <resources>
+        <resource>
+            <targetPath>${project.build.directory}/classes</targetPath>
+            <directory>src/main/resources</directory>
+            <filtering>true</filtering>
+            <includes>
+                <include>**/*.xml</include>
+                <include>**/*.properties</include>
+            </includes>
+        </resource>
+        <!-- 结合com.alibaba.dubbo.container.Main 按照约定把spring文件夹下面配置拷贝到META-INF下面 -->
+        <resource>
+            <targetPath>${project.build.directory}/classes/META-INF/spring</targetPath>
+            <directory>src/main/resources/spring</directory>
+            <filtering>true</filtering>
+            <includes>
+                <include>spring-context.xml</include>
+            </includes>
+        </resource>
+        <!-- 复制META-INF下面的配置到生成jar下,包括自定义的jetty内置容器和ip过滤白名单 -->
+        <resource>
+            <targetPath>${project.build.directory}/classes/META-INF/dubbo/internal</targetPath>
+            <directory>src/main/resources/META-INF/dubbo/internal</directory>
+            <filtering>true</filtering>
+            <includes>
+                <include>*</include>
+            </includes>
+        </resource>
+    </resources>
 
-	<pluginManagement>
-		<plugins>
-			<!-- 解决Maven插件在Eclipse内执行了一系列的生命周期引起冲突 -->
-			<plugin>
-				<groupId>org.eclipse.m2e</groupId>
-				<artifactId>lifecycle-mapping</artifactId>
-				<version>1.0.0</version>
-				<configuration>
-					<lifecycleMappingMetadata>
-						<pluginExecutions>
-							<pluginExecution>
-								<pluginExecutionFilter>
-									<groupId>org.apache.maven.plugins</groupId>
-									<artifactId>maven-dependency-plugin</artifactId>
-									<versionRange>[2.0,)</versionRange>
-									<goals>
-										<goal>copy-dependencies</goal>
-									</goals>
-								</pluginExecutionFilter>
-								<action>
-									<ignore />
-								</action>
-							</pluginExecution>
-						</pluginExecutions>
-					</lifecycleMappingMetadata>
-				</configuration>
-			</plugin>
-		</plugins>
-	</pluginManagement>
-	<plugins>
-		<!-- 打包jar文件时，配置manifest文件，加入lib包的jar依赖 -->
-		<plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-jar-plugin</artifactId>
-			<configuration>
-				<classesDirectory>target/classes/</classesDirectory>
-				<archive>
-					<manifest>
-						<mainClass>com.alibaba.dubbo.container.Main</mainClass>
-						<!-- 打包时 MANIFEST.MF文件不记录的时间戳版本 -->
-						<useUniqueVersions>false</useUniqueVersions>
-						<addClasspath>true</addClasspath>
-						<classpathPrefix>lib/</classpathPrefix>
-					</manifest>
-					<manifestEntries>
-						<Class-Path>.</Class-Path>
-					</manifestEntries>
-				</archive>
-			</configuration>
-		</plugin>
-		<plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-dependency-plugin</artifactId>
-			<executions>
-				<execution>
-					<id>copy-dependencies</id>
-					<phase>package</phase>
-					<goals>
-						<goal>copy-dependencies</goal>
-					</goals>
-					<configuration>
-						<type>jar</type>
-						<includeTypes>jar</includeTypes>
-						<useUniqueVersions>false</useUniqueVersions>
-						<outputDirectory>
-							${project.build.directory}/lib
-						</outputDirectory>
-					</configuration>
-				</execution>
-			</executions>
-		</plugin>
-		<!-- 默认jdk1.7 -->
-		<plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-compiler-plugin</artifactId>
-			<configuration>
-				<source>1.7</source>
-				<target>1.7</target>
-			</configuration>
-		</plugin>
-	</plugins>
+    <pluginManagement>
+        <plugins>
+            <!-- 解决Maven插件在Eclipse内执行了一系列的生命周期引起冲突 -->
+            <plugin>
+                <groupId>org.eclipse.m2e</groupId>
+                <artifactId>lifecycle-mapping</artifactId>
+                <version>1.0.0</version>
+                <configuration>
+                    <lifecycleMappingMetadata>
+                        <pluginExecutions>
+                            <pluginExecution>
+                                <pluginExecutionFilter>
+                                    <groupId>org.apache.maven.plugins</groupId>
+                                    <artifactId>maven-dependency-plugin</artifactId>
+                                    <versionRange>[2.0,)</versionRange>
+                                    <goals>
+                                        <goal>copy-dependencies</goal>
+                                    </goals>
+                                </pluginExecutionFilter>
+                                <action>
+                                    <ignore />
+                                </action>
+                            </pluginExecution>
+                        </pluginExecutions>
+                    </lifecycleMappingMetadata>
+                </configuration>
+            </plugin>
+        </plugins>
+    </pluginManagement>
+    <plugins>
+        <!-- 打包jar文件时，配置manifest文件，加入lib包的jar依赖 -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <configuration>
+                <classesDirectory>target/classes/</classesDirectory>
+                <archive>
+                    <manifest>
+                        <mainClass>com.alibaba.dubbo.container.Main</mainClass>
+                        <!-- 打包时 MANIFEST.MF文件不记录的时间戳版本 -->
+                        <useUniqueVersions>false</useUniqueVersions>
+                        <addClasspath>true</addClasspath>
+                        <classpathPrefix>lib/</classpathPrefix>
+                    </manifest>
+                    <manifestEntries>
+                        <Class-Path>.</Class-Path>
+                    </manifestEntries>
+                </archive>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>copy-dependencies</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>copy-dependencies</goal>
+                    </goals>
+                    <configuration>
+                        <type>jar</type>
+                        <includeTypes>jar</includeTypes>
+                        <useUniqueVersions>false</useUniqueVersions>
+                        <outputDirectory>
+                            ${project.build.directory}/lib
+                        </outputDirectory>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+        <!-- 默认jdk1.7 -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <source>1.7</source>
+                <target>1.7</target>
+            </configuration>
+        </plugin>
+    </plugins>
 
 
 </build>
