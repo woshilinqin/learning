@@ -1,4 +1,4 @@
-## maven构建包时build标签
+* > > ## maven构建包时build标签
 
 首先看下一个简单的pom.xml
 
